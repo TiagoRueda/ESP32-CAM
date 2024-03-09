@@ -1,0 +1,57 @@
+# put here your custom config value
+menu "Example Configuration"
+		config ESP_WIFI_SSID
+			string "WiFi SSID"
+			default "myssid"
+			help
+				SSID (network name) to connect to.
+
+		config ESP_WIFI_PASSWORD
+			string "WiFi Password"
+			default "mypassword"
+			help
+				WiFi password (WPA or WPA2) to connect to.
+
+		config ESP_MAXIMUM_RETRY
+			int "Maximum retry"
+			default 5
+			help
+				Set the Maximum retry to avoid station reconnecting to the AP unlimited when the AP is really inexistent.
+
+		config MDNS_HOSTNAME
+			string "mDNS Hostname"
+			default "esp32-camera"
+			help
+				The mDNS host name used by the ESP32.
+endmenu
+	menu "MQTT Server Setting"
+
+		config MQTT_BROKER
+			string "MQTT Broker"
+			default "broker.hivemq.com"
+			help
+				Host name or IP address of the broker to connect to
+
+		config PUB_TOPIC
+			string "Publish Topic"
+			default "/image/esp32cam"
+			help
+				Topic of publish
+
+	endmenu
+		menu "Select Shutter"
+		choice SHUTTER_SELECT
+			bool "Select Shutter"
+			default SHUTTER_ENTER
+			help
+				Selecting the shutter method
+
+			config SHUTTER_ENTER
+				bool "Use Enter key"
+			config SHUTTER_GPIO
+				bool "Use GPIO"
+			config SHUTTER_MQTT
+				bool "Use MQTT Subscribe"
+
+		endchoice
+	endmenu
